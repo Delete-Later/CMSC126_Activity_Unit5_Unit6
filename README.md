@@ -1,4 +1,12 @@
-# UPV CRS 2.0
+<div align="center">
+
+<h3>UPV CRS</h3>
+
+<img src="https://img.shields.io/badge/v2.0-7A0019?style=for-the-badge" alt="v2.0"/>
+
+_University of the Philippines Visayas Computer Registration System_
+
+</div>
 
 ---
 
