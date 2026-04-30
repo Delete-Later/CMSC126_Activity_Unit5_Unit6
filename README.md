@@ -57,16 +57,23 @@
 
 ### Homepage
 
-- _(Insert Screenshot)_
+- <img width="1676" height="1392" alt="Screenshot 2026-04-30 at 18-01-57 UPV CRS 2 0 Mockups" src="https://github.com/user-attachments/assets/dedef28b-f1d8-4439-9c2f-1a64465df4dc" />
 
 ### Student Page
-
-- _(Insert Screenshot)_
+- <img width="1676" height="1102" alt="Screenshot 2026-04-30 at 18-02-08 UPV CRS 2 0 Mockups" src="https://github.com/user-attachments/assets/4a52576f-dc56-4810-8927-4dce79354933" />
+- <img width="1676" height="1208" alt="Screenshot 2026-04-30 at 18-02-50 UPV CRS 2 0 Mockups" src="https://github.com/user-attachments/assets/71f77598-88b2-4ec1-ad5a-d073e77d687c" />
 
 ### Schedule / Conflict Check Screen
 
-- _(Insert Screenshot)_
+- <img width="1676" height="1276" alt="Screenshot 2026-04-30 at 18-03-07 UPV CRS 2 0 Mockups" src="https://github.com/user-attachments/assets/24a40a84-94d0-4c3c-aaec-57b413c5eb81" />
 
-### Additional Page (Specify)
+### Course Enlistment/Search
+
+- <img width="1676" height="1186" alt="Screenshot 2026-04-30 at 18-03-00 UPV CRS 2 0 Mockups" src="https://github.com/user-attachments/assets/f10c66fb-f202-4368-a5d4-89af620b3b5c" />
+
+### Form request
+
+- <img width="1676" height="1102" alt="Screenshot 2026-04-30 at 18-03-12 UPV CRS 2 0 Mockups" src="https://github.com/user-attachments/assets/e9b27e33-b500-48d9-a208-39cddaf8aaf9" />
+
 
 - _(Insert Screenshot)_
