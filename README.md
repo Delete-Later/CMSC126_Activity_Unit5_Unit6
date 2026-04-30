@@ -341,14 +341,28 @@ flowchart TB
 
 ## Mockups
 
+Access: <https://cmsc-126-activity-unit5-unit6.vercel.app/>
+
 ### Homepage
+
+<img src="./docs/images/home.png" alt="Home"/>
 
 ### Login Page
 
+<img src="./docs/images/login.png" alt="Login"/>
+
 ### Student Dashboard
+
+<img src="./docs/images/dashboard.png" alt="Dashboard"/>
 
 ### Enlistment
 
+<img src="./docs/images/enlistment.png" alt="Enlistment"/>
+
 ### Schedule / Conflict Check
 
+<img src="./docs/images/schedule.png" alt="Schedule"/>
+
 ### Grades
+
+<img src="./docs/images/grades.png" alt="Grades"/>
