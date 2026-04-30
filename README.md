@@ -107,59 +107,69 @@ sequenceDiagram
 
 **Language: TypeScript**
 
-- Enforces type safety for schedule and enrollment data models
-- Reduces runtime errors in complex UI state transitions
-- Supports maintainable multi-developer architecture
+- Prevents runtime data shape errors.
+- Enforces consistent API contracts between frontend and backend, reducing integration mismatches.
+- Improves maintainability in a multi-developer academic system where schema changes are frequent.
 
 **UI Library: React**
 
-- Component-based architecture suitable for dashboard-heavy systems
-- Efficient UI updates for dynamic enrollment states
+- Efficient UI updates under frequent state changes.
+- Component reuse reduces duplication.
+- Supports complex conditional rendering.
 
 **Framework: Next.js**
 
-- Provides routing, SSR, and optimized client-server integration
-- Enables separation of public vs authenticated system surfaces
+- Enables hybrid rendering (SSR/CSR), improving initial load time for heavy pages.
+- Simplifies routing for role-based access.
+- Improves performance under high read traffic during enrollment peaks via pre-rendering and caching strategies.
 
 **Styling: TailwindCSS**
 
-- Utility-first styling for rapid iteration
-- Reduces CSS maintenance overhead in multi-component systems
+- Reduces CSS complexity in a large multi-page system with repeated UI patterns.
+- Enables rapid iteration during UI adjustments for academic workflows (forms, tables, dashboards).
+- Minimizes stylesheet conflicts across distributed components.
 
 **Component Library: shadcn/ui**
 
-- Accessible base components without architectural lock-in
-- Supports customization for institutional branding requirements
+- Ensures consistent UI behavior across pages.
+- Provides accessible base components without heavy framework lock-in.
+- Allows direct control over critical UI logic without black-box abstractions.
 
 **Data Fetching: TanStack Query**
 
-- Centralized server-state management
-- Reduces redundant API calls during high traffic periods
+- Prevents redundant API calls during high traffic.
+- Provides caching + request deduplication, reducing backend load during enrollment spikes.
+- Ensures UI consistency for server state.
 
 **State Management: Redux Toolkit**
 
-- Global state consistency for authentication and enrollment flow
-- Predictable state transitions for complex UI interactions
+- Centralizes global state.
+- Ensures predictable state transitions.
+- Useful for cross-component synchronization.
 
 **Validation: Zod**
 
-- Shared schema validation between frontend and backend
-- Prevents invalid enrollment and scheduling payloads
+- Enforces strict schema validation before API submission (critical for preventing invalid enrollments).
+- Shared validation logic reduces mismatch between frontend and backend rules.
+- Prevents malformed payloads from reaching transactional backend operations.
 
 **Form Handling: React Hook Form**
 
-- Efficient handling of complex enrollment forms
-- Minimizes re-render overhead under large forms
+- Minimizes re-render overhead in large forms.
+- Efficient handling of dynamic form fields.
+- Improves responsiveness under complex input validation rules.
 
 **Linting & Formatting: ESLint + Prettier**
 
-- Ensures consistent codebase across contributors
-- Reduces integration issues during collaboration
+- Prevents inconsistent code patterns across team members.
+- Reduces merge conflicts and logic inconsistencies in shared modules.
+- Enforces uniform structure for long-term maintainability.
 
 **Package Management: pnpm**
 
-- Deterministic dependency resolution
-- Efficient monorepo-friendly structure
+- Deterministic dependency resolution avoids "works on my machine" issues.
+- Efficient storage and install speed important for CI/CD pipelines.
+- Better handling of large dependency trees in React/Next.js ecosystems.
 
 ---
 
@@ -177,43 +187,51 @@ sequenceDiagram
 
 **Runtime: Python**
 
-- Rapid backend development for academic systems
-- Strong ecosystem for structured data processing
+- Fast development of academic CRUD-heavy systems with complex relational logic.
+- Strong ecosystem for transactional workflows and data processing.
+- Readable syntax reduces onboarding cost for multi-developer teams.
 
 **Framework: Django**
 
-- Provides built-in authentication, ORM, and admin interface
-- Strong transactional consistency model for relational data
+- Built-in ORM ensures safe transactional operations for enrollment (critical correctness requirement).
+- Admin panel accelerates internal management workflows (registrar operations).
+- Strong ACID-aligned design reduces risk of inconsistent states.
 
 **API Layer: Django REST Framework (DRF)**
 
-- Standardized API abstraction layer
-- Integrates tightly with Django ORM and auth system
+- Standardized API layer ensures consistent request/response structure.
+- Integrates tightly with Django ORM, reducing custom backend complexity.
+- Supports authentication and permission layers required for role-based access control.
 
 **Authentication: JWT / Session-based Hybrid Model**
 
-- JWT for stateless API access (frontend decoupling)
-- Session-based fallback for admin and internal tools
+- JWT supports stateless scaling for frontend-heavy API usage.
+- Sessions are retained for sensitive admin and registrar workflows requiring tighter control.
+- Hybrid approach balances scalability and security requirements.
 
 **Caching: Redis**
 
-- Improves performance for frequently accessed course and schedule data
-- Reduces database load during enrollment peaks
+- Reduces database load during enrollment peaks by caching frequently accessed data (courses, schedules).
+- Prevents repeated expensive joins during schedule browsing.
+- Acts as a buffer layer under burst traffic conditions.
 
 **Web Server: Gunicorn + Nginx**
 
-- Gunicorn handles application process management
-- Nginx handles TLS termination, routing, and static assets
+- Gunicorn efficiently handles concurrent Python worker processes.
+- Nginx provides load balancing, TLS termination, and static file optimization.
+- Separation improves stability under high enrollment traffic bursts.
 
 **Code Quality: Ruff (Python)**
 
-- Static analysis and formatting enforcement
-- Early detection of backend logic issues
+- Reduces risk of subtle bugs.
+- Enforces backend code consistency and detects potential logic errors early.
+- Replaces slower linting pipelines, improving CI speed.
 
 **Dependency Management: Poetry**
 
-- Reproducible Python environments
-- Simplified dependency resolution
+- Ensures reproducible backend environments across dev and production.
+- Prevents dependency drift that could break production enrollment logic.
+- Simplifies dependency locking for CI/CD pipelines.
 
 ---
 
@@ -223,13 +241,13 @@ sequenceDiagram
 
 **Database Model: Relational (SQL-based)**
 
-- Required due to structured academic relationships (students, courses, prerequisites)
+- Relational structure naturally models academic dependencies (prerequisites, sections, schedules).
 
 **DBMS: PostgreSQL**
 
-- Strong ACID guarantees for enrollment correctness
-- Supports transactional locking required for concurrent registration
-- Efficient handling of relational constraints and joins
+- ACID compliance is essential to prevent over-enrollment, duplicate registrations, etc.
+- Strong transaction isolation prevents race conditions during simultaneous enrollment attempts.
+- Supports row-level locking, critical during high-contention enrollment windows.
 
 ---
 
@@ -267,10 +285,27 @@ sequenceDiagram
 
 The system follows a decoupled frontend-backend architecture with managed cloud hosting services:
 
-- Frontend: Vercel-hosted Next.js application
-- Backend: Render-hosted Django API service
-- Database: Managed PostgreSQL (Render)
-- Object storage: S3-compatible storage
+#### Vercel (Frontend)
+
+- Edge CDN improves performance for read-heavy dashboard and schedule pages.
+- Automatic scaling handles sudden spikes during enrollment periods.
+- Optimized for Next.js SSR/ISR workloads.
+
+#### Render (Backend)
+
+- Managed deployment reduces operational overhead for Django services.
+- Supports scaling during enrollment spikes.
+- Simplifies integration with PostgreSQL and Redis services.
+
+#### PostgreSQL (Managed)
+
+- Ensures database reliability without self-managed infrastructure risk.
+- Provides backups and failover support critical for academic data integrity.
+
+#### S3-Compatible Storage
+
+- Offloads static/media files from backend, reducing server load.
+- Ensures durable storage for documents and assets.
 
 ---
 
